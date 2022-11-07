@@ -11,24 +11,24 @@
 10 x 5 = 50
  */
 
-const fs = require('fs');
+const { crearArchivo } = require('./helpers/multiplicar');
+const argv = require('./config/yargs');
+
+require('colors');
+
 
 console.clear();
-console.log('=============');
-console.log (' Tabla del 5');
-console.log('=============');
 
- const base = 5;
- let salida = '';
+crearArchivo( argv.b, argv.l, argv.h )
+    .then( nombreArchivo => console.log(nombreArchivo.rainbow, 'creado') )
+    .catch( err => console.log(err) );
 
-for(let i = 1; i<=10; i++) {
-salida += `${ base } x ${ i } = ${ base * i }\n`;
-}
+//const [ , , arg3 ='base=5'] = process.argv;
+//const [ , base = 5] =arg3.split('=');
 
-console.log(salida);
 
-fs.writeFile('tabla-5.txt',salida, (err) =>{
-    if (err) throw err;
+//const base = 3;
 
-    console.log('tabla-5.txt creada')
-})
+//crearArchivo(base)
+//    .then(nombreAchivo => console.log(nombreAchivo, 'creado'))
+//    .catch(err => console.log(err));
